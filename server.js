@@ -7,11 +7,17 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+// 首先引入 cookie-parser 这个模块
+var cookieParser = require('cookie-parser');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// 使用 cookieParser 中间件，cookieParser(secret, options)
+// 其中 secret 用来加密 cookie 字符串（下面会提到 signedCookies）
+// options 传入上面介绍的 cookie 可选参数
+app.use(cookieParser());
 
 var port = process.env.PORT || 3000;        // set our port
 
@@ -40,8 +46,16 @@ router.use(function(req, res, next) {
 });
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+router.get('/', function (req, res) {
+  // 如果请求中的 cookie 存在 isVisit, 则输出 cookie
+  // 否则，设置 cookie 字段 isVisit, 并设置过期时间为1分钟
+  if (req.cookies.isVisit) {
+    console.log(req.cookies);
+    res.json({ msg: 'welcome again'});
+  } else {
+    res.cookie('isVisit', 1, {maxAge: 60 * 1000});
+    res.json({ msg: 'welcome'});
+  }
 });
 
 // on routes that end in /bears
