@@ -22,7 +22,7 @@ app.use(cookieParser());
 var port = process.env.PORT || 3000;        // set our port
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://admin:klomSU6prSBS@localhost:27017/admin');
+mongoose.connect('mongodb://admin:klomSU6prSBS@ds047752.mongolab.com:47752/restfulbeardb');
 
 // mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'); 
 // connect to our database 10bcee9fb6a4:27017
