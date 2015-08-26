@@ -1,3 +1,7 @@
 # restfulbear
 
-eg:  https://restfulbearexp.herokuapp.com/api
+## Guide
+https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
+
+## Online Demo
+https://restfulbearexp.herokuapp.com/api
